@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('ten-reasons-internet-banking_opt.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        .login-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .login-container {
+            background: #333;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #444;
+            color: #fff;
+        }
+        .login-container input::placeholder {
+            color: #aaa;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background: #008cba;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .login-container button:hover {
+            background: #005f5f;
+        }
+        .login-container a {
+            color: #00aaff;
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+        .login-container p {
+            margin-top: 20px;
+            color:coral
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            background:#333
+        }
+    </style>
+</head>
+<body>
+    <div class="login-section">
+        <a href="index.html" class="btn btn-light back-button">Back</a>
+        <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button onclick="login()">Login</button>
+        <p id="login-message"></p>
+        <a href="signup.html">Don't have an account? sign up here</a>
+        <div id="2fa-container" style="display: none;">
+            <input type="text" id="2fa-code" placeholder="Enter 2FA Code" required>
+            <button onclick="verify2FA()">Verify 2FA</button>
+            <button onclick="resend2FA()">Resend 2FA Code</button>
+    </div>
+    <script>
+        let generated2FACode;
+
+function generate2FACode() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Validate username
+    if (username.trim() === '') {
+        document.getElementById('login-message').innerText = 'Username is required.';
+        return;
+    }
+
+    // Retrieve stored credentials
+    const storedUsername = localStorage.getItem('username');
+    const storedPassword = localStorage.getItem('password');
+
+    // Validate credentials
+    if (username === storedUsername && password === storedPassword) {
+        // Simulate sending 2FA code
+        generated2FACode = generate2FACode();
+        alert('Your 2FA code is: ' + generated2FACode);
+
+        document.getElementById('2fa-container').style.display = 'block';
+        document.getElementById('login-message').innerText = 'Please enter the 2FA code';
+    } else {
+        document.getElementById('login-message').innerText = 'Invalid username or password';
+    }
+}
+
+function verify2FA() {
+    const code = document.getElementById('2fa-code').value;
+    if (code === generated2FACode) {
+        document.getElementById('login-message').innerText = 'Login successful!';
+        // Redirect to wallet.html after successful login with a delay
+        setTimeout(() => {
+            window.location.href = 'wallet.html';
+        }, 1000); // 1-second delay
+    } else {
+        document.getElementById('login-message').innerText = 'Invalid 2FA code';
+    }
+}
+
+function resend2FA() {
+    generated2FACode = generate2FACode();
+    alert('Your new 2FA code is: ' + generated2FACode);
+    document.getElementById('login-message').innerText = 'A new 2FA code has been sent';
+}
+    </script>
+</body>
+</html>

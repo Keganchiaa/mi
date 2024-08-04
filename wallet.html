@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Wallet</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('ten-reasons-internet-banking_opt.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #00aaff;
+        }
+        .container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            margin-top: 70px;
+        }
+        .welcome-message {
+            margin-bottom: 20px;
+        }
+        .account-info {
+            margin-bottom: 20px;
+        }
+        .account-info h3 {
+            color: #00aaff;
+        }
+        .account-info p {
+            color: #fff;
+        }
+        .btn-custom {
+            background-color: #008cba;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 10px;
+        }
+        .btn-custom:hover {
+            background-color: #005f5f;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">EasyBank - Digital Wallet</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="topup.html">Top Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="transfer.html">Transfer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="transaction.html">Transaction History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add.html">Add Recipient</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="save.html">Saved Recipient</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="welcome-message">
+            <h2>Welcome, <span id="username"></span>!</h2>
+        </div>
+        <div class="account-info">
+            <h3>Account Information</h3>
+            <div class="card bg-dark text-white mb-3">
+                <div class="card-body">
+                    <p><strong>Account Number:</strong> <span id="account-number"></span></p>
+                    <p><strong>Account Balance:</strong> $<span id="account-balance"></span></p>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn-custom" onclick="location.href='topup.html'">Top Up</button>
+                <button class="btn-custom" onclick="location.href='transfer.html'">Transfer</button>
+                <button class="btn-custom" onclick="location.href='transaction.html'">Transaction History</button>
+                <button class="btn-custom" onclick="location.href='add.html'">Add Recipient</button>
+                <button class="btn-custom" onclick="location.href='save.html'">Saved Recipient</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function generateUniqueAccountNumber() {
+            let accountNumber;
+            const usedAccountNumbers = JSON.parse(localStorage.getItem('usedAccountNumbers')) || [];
+
+            do {
+                accountNumber = Math.floor(100000000 + Math.random() * 900000000).toString();
+            } while (usedAccountNumbers.includes(accountNumber));
+
+            usedAccountNumbers.push(accountNumber);
+            localStorage.setItem('usedAccountNumbers', JSON.stringify(usedAccountNumbers));
+
+            return accountNumber;
+        }
+
+        // Check if user is already logged in and has an account number
+        let accountNumber = localStorage.getItem('accountNumber');
+        if (!accountNumber) {
+            // If no account number, generate a unique one and set initial balance to $0
+            accountNumber = generateUniqueAccountNumber();
+            localStorage.setItem('accountNumber', accountNumber);
+            localStorage.setItem('accountBalance', '0.00');
+        }
+
+        // Retrieve user information from localStorage
+        const username = localStorage.getItem('username') || 'User';
+        const accountBalance = parseFloat(localStorage.getItem('accountBalance')).toFixed(2);
+
+        // Populate user information on the page
+        document.getElementById('username').textContent = username;
+        document.getElementById('account-number').textContent = accountNumber;
+        document.getElementById('account-balance').textContent = accountBalance;
+    </script>
+</body>
+</html>

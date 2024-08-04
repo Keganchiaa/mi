@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyBank - Digital Banking Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('ten-reasons-internet-banking_opt.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 10px 0;
+            position: relative;
+            z-index: 10;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0 15px;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .main-banner {
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .main-banner h2 {
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .cta {
+            background-color: #008cba;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .cta:hover {
+            background-color: #005f5f;
+        }
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: rgb(69, 65, 65); /* Semi-transparent background for better readability */
+            color: #fff;
+            border-radius: 10px;
+        }
+        .feature {
+            flex: 1;
+            text-align: center;
+            margin: 10px;
+        }
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+        .feature p {
+            margin: 0;
+        }
+        .service {
+            background-color: #333; /* Semi-transparent background */
+            margin: 10px 0;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            max-width: 600px;
+        }
+        .section {
+            background-color: #333; /* Semi-transparent background */
+            margin: 10px 0;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            display: inline-block;
+            max-width: 800px;
+            color: #fff;
+        }
+        .section h2 {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .contact-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .contact-form-container {
+            background-color: #333;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        .contact-form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-form-container label {
+            margin: 10px 0 5px;
+            text-align: left;
+            color: #fff;
+        }
+        .contact-form-container input,
+        .contact-form-container textarea {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .contact-form-container button {
+            background-color: #008cba;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .contact-form-container button:hover {
+            background-color: #005f5f;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>EasyBank</h1>
+    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="signup.html">sign up</a>
+        <a href="login.html">login</a>
+    </nav>
+    <div class="content" id="home">
+        <section class="main-banner">
+            <div>
+                <h2>Revolutionizing Digital Banking with Lower Fees and Better Accessibility</h2>
+                <a href="#services" class="cta">Get Started</a>
+            </div>
+        </section>
+        <section>
+            <div>
+                <h2>Our Mission</h2>
+                <p>To provide a seamless and secure digital banking experience for everyone.</p>
+            </div>
+        </section>
+        <section class="features">
+            <div class="feature">
+                <h3>Low Fees</h3>
+                <p>Experience banking with minimal transaction and maintenance fees.</p>
+            </div>
+            <div class="feature">
+                <h3>High Security</h3>
+                <p>Advanced security measures for your peace of mind.</p>
+            </div>
+            <div class="feature">
+                <h3>Easy Access</h3>
+                <p>Access your account anytime, anywhere with our mobile app.</p>
+            </div>
+        </section>
+    </div>
+    <div class="content" id="services">
+        <h2>Our Services</h2>
+        <div class="service">
+            <h3>24/7 Customer Support</h3>
+            <p>Get assistance anytime with our AI-powered support system.</p>
+        </div>
+        <div class="service">
+            <h3>Seamless Money Transfers</h3>
+            <p>Transfer money instantly and securely with EasyBank.</p>
+        </div>
+        <a href="signup.html" class="cta">Sign Up Now</a>
+    </div>
+    <div class="content" id="about">
+        <h2>About us</h2>
+        <div class="section">
+            <h3>Our History</h3>
+            <p>EasyBank was founded in 2020 with the goal of revolutionizing digital banking. Over the years, we have grown from a small startup to a leading provider of innovative banking solutions. Our journey has been marked by continuous innovation and a commitment to customer satisfaction.</p>
+        </div>
+        <div class="section">
+            <h3>Our Mission</h3>
+            <p>Our mission is to provide a seamless and secure digital banking experience for everyone. We aim to make banking accessible, convenient, and affordable for all our customers.</p>
+        </div>
+        <div class="section">
+            <h3>Our Vision</h3>
+            <p>Our vision is to be the world's most trusted digital bank, offering the best services and the most secure platform. We envision a future where banking is fully digital, secure, and tailored to the needs of every individual.</p>
+        </div>
+    </div>
+    <div class="content" id="contact">
+        <div class="contact-section">
+            <div class="contact-form-container">
+                <h2>Contact Us</h2>
+                <p>Email: support@easybank.com | Phone: +123 456 7890</p>
+                <form>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                    
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 EasyBank. All rights reserved.</p>
+        <p><a href="#" style="color:#fff;">Terms of Service</a> | <a href="#" style="color:#fff;">Privacy Policy</a></p>
+    </footer>
+</body>
+</html>

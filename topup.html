@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('ten-reasons-internet-banking_opt.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #00aaff;
+        }
+        .container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        .form-group label {
+            color: #00aaff;
+        }
+        .form-control {
+            background-color: #444;
+            color: #fff;
+            border: 1px solid #00aaff;
+        }
+        .btn-custom {
+            background-color: #008cba;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+        .btn-custom:hover {
+            background-color: #005f5f;
+        }
+        #message {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">EasyBank - Digital Wallet</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="transfer.html">Transfer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="transaction.html">Transaction History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add.html">Add Recipient</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="save.html">Saved Recipient</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="wallet.html">Back to walllet</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Top Up Account</h2>
+        <p><strong>Account Number:</strong> <span id="account-number"></span></p>
+        <form id="topup-form">
+            <div class="form-group">
+                <label for="payment-method">Payment Method</label>
+                <select class="form-control" id="payment-method" required>
+                    <option value="">Select Payment Method</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                    <option value="PayPal">PayPal</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" class="form-control" id="amount" placeholder="Enter amount" required>
+            </div>
+            <button type="submit" class="btn-custom">Top Up</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Simulating retrieving user data
+        const accountNumber = localStorage.getItem('accountNumber') || '123456789';
+        const accountBalance = parseFloat(localStorage.getItem('accountBalance')) || 0;
+
+        // Populate account number on the page
+        document.getElementById('account-number').textContent = accountNumber;
+
+        // Function to save transaction
+        function saveTransaction(type, amount, details) {
+            const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+            const date = new Date().toLocaleString();
+            transactions.push({ date, type, amount, details });
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+        }
+
+        // Handle form submission
+        document.getElementById('topup-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const paymentMethod = document.getElementById('payment-method').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const messageElement = document.getElementById('message');
+
+            if (paymentMethod && amount > 0) {
+                const newBalance = accountBalance + amount;
+                localStorage.setItem('accountBalance', newBalance.toFixed(2));
+                
+                // Save the transaction
+                saveTransaction('Top Up', amount, `Method: ${paymentMethod}`);
+                
+                messageElement.textContent = `Top up successful! New balance: $${newBalance.toFixed(2)}`;
+                messageElement.style.color = '#00aaff';
+                document.getElementById('topup-form').reset(); // Reset the form to clear the input fields
+            } else {
+                messageElement.textContent = 'Please select a payment method and enter a valid amount.';
+                messageElement.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
